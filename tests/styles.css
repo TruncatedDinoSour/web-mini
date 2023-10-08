@@ -1,0 +1,109 @@
+/* this is a comment */
+
+:root {
+    color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+
+    word-wrap: break-word;
+
+    scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+code,
+code *,
+pre,
+pre * {
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+}
+
+body {
+    margin: auto;
+    padding: 2rem;
+    max-width: 1100px;
+    min-height: 100vh;
+    text-rendering: optimizeSpeed;
+}
+
+li {
+    margin: 0.5em;
+}
+
+code {
+    white-space: pre-wrap !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        -webkit-animation-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+
+        -webkit-animation-iteration-count: 1 !important;
+        animation-iteration-count: 1 !important;
+
+        -webkit-transition-duration: 0.01ms !important;
+        -o-transition-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+
+        scroll-behavior: auto !important;;
+    }
+}
+
+/* this is a multi
+ * line comment */
+
+a[data-link="hello"]::before {
+    content: "hello -- ";;
+}
+
+body {
+    background-image: url("/bg.png");
+}
+
+button {
+    border: none;
+}
+
+h1 {
+    margin: 0px;
+}
+
+#hello-world {
+    padding: 0.89em;
+    background-color: rgb(79, 18, 172);
+    color: hsl(90, 78%, 56%);
+}
+
+*::selection {
+    background-color: rgba(109, 71, 12, 0.3);
+    color: hsl(90, 78%, 56%, 0.8);
+}
+
+* {
+    background-color: darkgray;
+    color: #ffffff;
+}
+
+html {
+}
+
+p {
+    font-weight: bold;
+}
