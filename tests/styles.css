@@ -105,6 +105,9 @@ html {
 }
 
 p {
+    margin: 0cm;
+    padding: 0.1em;
+    border-radius: 0.0cm;
     font-weight: bold;
     color: magenta;
 }

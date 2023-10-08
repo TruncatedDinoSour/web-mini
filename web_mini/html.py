@@ -24,7 +24,6 @@ def html_remove_comments(pat: re.Pattern[str], html: str) -> str:
 
 def html_remove_type(html: str) -> str:
     """remove html `type` attr from <script> and <style>"""
-
     return (
         html.replace('<style type="text/css">', "<style>")
         .replace("<style type='text/css'>", "<style>")
@@ -35,13 +34,10 @@ def html_remove_type(html: str) -> str:
     )
 
 
-def html_remove_unneeded_tags(html: str) -> str:
-    """remove html <script> type"""
-
-    for tag in const.UNNEEDED_HTML_TAGS:
-        html = html.replace(tag, "")
-
-    return html
+@html_fns.recache(r"(?:" + "|".join(const.UNNEEDED_HTML_TAGS) + r")", re.I)
+def html_remove_unneeded_tags(pat: re.Pattern[str], html: str) -> str:
+    """remove optional html tags"""
+    return pat.sub("", html)
 
 
 @html_fns.recache(r'([a-zA-Z]+)="([a-zA-Z0-9-_\.]+)"')

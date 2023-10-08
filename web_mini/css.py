@@ -41,23 +41,19 @@ def css_none_to_zero(pat: re.Pattern[str], css: str) -> str:
     return pat.sub(r"\1:0", css)
 
 
-@css_fns.recache(
-    r"([\s:])(0)("
-    r"em|ex|cap|ch|ic|rem|lh|rlh|vw|vh"
-    r"|vi|vb|vmin|vmax|cqw|cqh|cqi|cqb|cqmin|cqmax"
-    r"|cm|mm|Q|in|pc|pt|px|deg|grad|rad|turn"
-    r"|s|ms|Hz|kHz|dpi|dpcm|dppx|x|fr|%"
-    r")"
-)
-def css_sub_zero_units(pat: re.Pattern[str], css: str) -> str:
-    """replace zero units with just zero"""
-    return pat.sub(r"\1\2", css)
-
-
 @css_fns.recache(r"(:|\s)0+\.(\d+)")
 def css_shorten_floats(pat: re.Pattern[str], css: str) -> str:
     """shorten 0.x to .x"""
     return pat.sub(r"\1.\2", css)
+
+
+@css_fns.recache(
+    r"([^:]+:0)(?:px|em|rem|ex|ch|vw|vh|vmin|vmax|%|cm|mm|in|pt|pc)",
+    re.I,
+)
+def css_sub_zero_units(pat: re.Pattern[str], css: str) -> str:
+    """replace zero units with just zero"""
+    return pat.sub(r"\1", css)
 
 
 @css_fns.recache(r"rgb\((\d+),\s*(\d+),\s*(\d+)\)")
@@ -150,8 +146,8 @@ def minify_css(css: str) -> str:
     css = css_unquote_selectors(css)
     css = css_remove_url_quotes(css)
     css = css_none_to_zero(css)
-    css = css_sub_zero_units(css)
     css = css_shorten_floats(css)
+    css = css_sub_zero_units(css)
     css = css_rgb2hex(css)
     css = css_hsl2hex(css)
     css = css_sub_clrs(css)
