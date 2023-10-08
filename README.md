@@ -88,6 +88,9 @@ if ur using web-mini with threading make sure to call `compileall()` so caching 
 ```py
 import web_mini
 
-web_mini.html.html_fns.compileall()
-web_mini.css.css_fns.compileall()
+web_mini.compileall()
+
+# or :
+# web_mini.css.css_fns.compileall()
+# web_mini.html.html_fns.compileall()
 ```

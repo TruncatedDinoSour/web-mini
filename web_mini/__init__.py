@@ -8,4 +8,11 @@ from typing import Tuple
 from . import css, html
 
 __version__: str = "1.2.6"
-__all__: Tuple[str, ...] = "__version__", "html", "css"
+__all__: Tuple[str, ...] = "__version__", "css", "html", "compileall"
+
+
+def compileall() -> None:
+    """compile all css and html regex"""
+
+    css.css_fns.compileall()
+    html.html_fns.compileall()
