@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 """minify css"""
 
+from __future__ import annotations
+
 import re
 
 from . import clrs, const, recache

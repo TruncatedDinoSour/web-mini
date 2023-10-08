@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 """regex cache"""
 
+from __future__ import annotations
+
 import re
 import typing
 from functools import lru_cache, wraps

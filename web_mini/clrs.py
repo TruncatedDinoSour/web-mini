@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 """colour helpers"""
 
+from __future__ import annotations
+
 import re
 import typing
 
