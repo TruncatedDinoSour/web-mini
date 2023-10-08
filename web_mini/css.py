@@ -33,12 +33,6 @@ def css_remove_whitespace(pat: re.Pattern[str], css: str) -> str:
     return pat.sub(r"\1", css).replace("and (", "and(").replace(") and", ")and").strip()
 
 
-@css_fns.recache(r";;+")
-def css_remove_semicolons(pat: re.Pattern[str], css: str) -> str:
-    """remove useless semicolons"""
-    return pat.sub("", css.replace(";}", "}"))
-
-
 @css_fns.recache(r"(border|opacity):none")
 def css_none_to_zero(pat: re.Pattern[str], css: str) -> str:
     """prop: none to prop: 0"""
@@ -142,6 +136,12 @@ def css_font_weights(css: str) -> str:
     )
 
 
+@css_fns.recache(r";;+")
+def css_remove_semicolons(pat: re.Pattern[str], css: str) -> str:
+    """remove useless semicolons"""
+    return pat.sub("", css.replace(";}", "}"))
+
+
 def minify_css(css: str) -> str:
     """run all css stages"""
 
@@ -151,7 +151,6 @@ def minify_css(css: str) -> str:
     css = css_remove_whitespace(css)
     css = css_unquote_selectors(css)
     css = css_remove_url_quotes(css)
-    css = css_remove_semicolons(css)
     css = css_none_to_zero(css)
     css = css_sub_zero_units(css)
     css = css_shorten_floats(css)
@@ -163,5 +162,6 @@ def minify_css(css: str) -> str:
     css = css_hsla2hex(css)
     css = css_remove_empty_rules(css)
     css = css_font_weights(css)
+    css = css_remove_semicolons(css)
 
     return css
