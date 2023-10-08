@@ -26,10 +26,8 @@ def html_remove_type(html: str) -> str:
     """remove html `type` attr from <script> and <style>"""
     return (
         html.replace('<style type="text/css">', "<style>")
-        .replace("<style type='text/css'>", "<style>")
         .replace("<style type=text/css>", "<style>")
         .replace('<script type="text/javascript">', "<script>")
-        .replace("<script type='text/javascript'>", "<script>")
         .replace("<script type=text/javascript>", "<script>")
     )
 
