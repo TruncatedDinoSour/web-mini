@@ -4,9 +4,8 @@
 
 from __future__ import annotations
 
+import re
 from typing import List
-
-import regex as re
 
 from . import const, recache
 
