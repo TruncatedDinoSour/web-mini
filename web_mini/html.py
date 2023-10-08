@@ -11,9 +11,9 @@ from . import const, recache
 
 html_fns: recache.ReCache = recache.ReCache()
 
-TAG_RE: re.Pattern[str] = re.compile(r"<[^>]+>", re.I | re.M | re.S)
-TAG_SPACE_RE: re.Pattern[str] = re.compile(r">\s+<")
-TAG_BREAK_RE: re.Pattern[str] = re.compile(r"\s{2,}|[\r\n]")
+HTML_TAG_RE: re.Pattern[str] = re.compile(r"<[^>]+>", re.I | re.M | re.S)
+HTML_TAG_SPACE_RE: re.Pattern[str] = re.compile(r">\s+<")
+HTML_TAG_BREAK_RE: re.Pattern[str] = re.compile(r"\s{2,}|[\r\n]")
 
 
 @html_fns.recache(r"<!--.*?-->", re.S)
@@ -41,7 +41,7 @@ def html_remove_unneeded_tags(pat: re.Pattern[str], html: str) -> str:
 @html_fns.recache(r'([a-zA-Z]+)="([a-zA-Z0-9-_\.]+)"')
 def html_unquote_attrs(pat: re.Pattern[str], html: str) -> str:
     """remove all html quotes on attibutes if possible"""
-    return TAG_RE.sub(lambda m: pat.sub(r"\1=\2", m.group()), html)
+    return HTML_TAG_RE.sub(lambda m: pat.sub(r"\1=\2", m.group()), html)
 
 
 @html_fns.recache(
@@ -53,13 +53,13 @@ def html_remove_whitespace(pat: re.Pattern[str], html: str) -> str:
 
     tags: int = 0
     split: List[str] = [
-        TAG_SPACE_RE.sub("> <", tag) if idx % 2 == 1 else tag
+        HTML_TAG_SPACE_RE.sub("> <", tag) if idx % 2 == 1 else tag
         for idx, tag in enumerate(pat.split(html))
     ]
 
     for idx, tag in enumerate(split):
         if idx % 2 == 0 and tags == 0:
-            split[idx] = TAG_BREAK_RE.sub(" ", tag)
+            split[idx] = HTML_TAG_BREAK_RE.sub(" ", tag)
         elif (idx + 1) % 2 == 0:
             tags += 1 if "/" not in tag else -1
 

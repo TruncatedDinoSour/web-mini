@@ -11,6 +11,17 @@ from . import clrs, const, recache
 css_fns: recache.ReCache = recache.ReCache()
 
 
+def cssfn_shorten_clr(match: re.Match[str]) -> str:
+    """shorten colours"""
+
+    clr: str = match.group(1)
+
+    if all(clr[idx] == clr[idx + 1] for idx in range(0, 5, 2)):
+        return f"#{clr[0]}{clr[2]}{clr[4]}"
+
+    return f"#{clr}"
+
+
 @css_fns.recache(r"/\*.*?\*/", re.S)
 def css_remove_comments(pat: re.Pattern[str], css: str) -> str:
     """remove all useless comments"""
@@ -83,16 +94,7 @@ def css_sub_clrs(pat: re.Pattern[str], css: str) -> str:
 @css_fns.recache(r"#([0-9a-fA-F]{6})")
 def css_shorten_hex(pat: re.Pattern[str], css: str) -> str:
     """shorten hex like #xxyyzzaa to #xyza"""
-
-    def shorten_clr(match: re.Match[str]) -> str:
-        clr: str = match.group(1)
-
-        if all(clr[idx] == clr[idx + 1] for idx in range(0, 5, 2)):
-            return f"#{clr[0]}{clr[2]}{clr[4]}"
-
-        return f"#{clr}"
-
-    return pat.sub(shorten_clr, css)
+    return pat.sub(cssfn_shorten_clr, css)
 
 
 @css_fns.recache(r"rgba\((\d+),\s*(\d+),\s*(\d+),\s*([\d.]+)\)")
