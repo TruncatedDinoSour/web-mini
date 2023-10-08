@@ -78,13 +78,10 @@ def css_hsl2hex(pat: re.Pattern[str], css: str) -> str:
     )
 
 
-def css_sub_clrs(css: str) -> str:
+@css_fns.recache(r":(" + "|".join(const.REPLACABLE_CLRS.keys()) + r")\b")
+def css_sub_clrs(pat: re.Pattern[str], css: str) -> str:
     """replace built-in clrs w shorter hex colours"""
-
-    for builtin, hexclr in const.REPLACABLE_CLRS.items():
-        css = css.replace(f":{builtin}", hexclr)
-
-    return css
+    return pat.sub(lambda m: const.REPLACABLE_CLRS[m.group(1)], css)
 
 
 @css_fns.recache(r"#([0-9a-fA-F]{6})")
@@ -128,7 +125,6 @@ def css_remove_empty_rules(pat: re.Pattern[str], css: str) -> str:
 
 def css_font_weights(css: str) -> str:
     """shrink font weights"""
-
     return css.replace(
         "font-weight:normal",
         "font-weight:400",

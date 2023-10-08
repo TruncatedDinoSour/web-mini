@@ -6,25 +6,16 @@ from __future__ import annotations
 
 import re
 import typing
-from functools import lru_cache, wraps
+from functools import wraps
 
 
 class ReCache:
     """regex cache"""
 
-    __slots__: typing.Tuple[str, str] = ("cache", "build_hooks")
+    __slots__: typing.Tuple[str] = ("cache",)
 
     def __init__(self) -> None:
         self.cache: typing.Set[typing.Callable[[re.Pattern[str], str], str]] = set()
-        self.build_hooks: typing.Set[typing.Callable[..., None]] = set()
-
-    def add_build_hook(
-        self, hook: typing.Callable[..., None]
-    ) -> typing.Callable[..., None]:
-        """add a build hook to compileall()"""
-
-        self.build_hooks.add(hook)
-        return hook
 
     def recache(
         self,
@@ -51,15 +42,12 @@ class ReCache:
 
                 return fn(fn._pat, code)  # type: ignore
 
-            return lru_cache()(wrapper)
+            return wrapper
 
         return decorator
 
     def compileall(self) -> None:
         """compile all regexes"""
-
-        for hook in self.build_hooks:
-            hook()
 
         for fn in self.cache:
             if isinstance(fn._pat, re.Pattern):  # type: ignore
