@@ -44,7 +44,7 @@ def html_remove_unneeded_tags(html: str) -> str:
     return html
 
 
-@html_fns.recache(r'([^=]+)=["\']([^"\'=\s]*)["\']')
+@html_fns.recache(r'([a-zA-Z]+)="([a-zA-Z0-9-_\.]+)"')
 def html_unquote_attrs(pat: re.Pattern[str], html: str) -> str:
     """remove all html quotes on attibutes if possible"""
     return TAG_RE.sub(lambda m: pat.sub(r"\1=\2", m.group()), html)

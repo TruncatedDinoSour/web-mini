@@ -28,6 +28,16 @@
         <script type="text/javascript">
             console.log("hello :)");
         </script>
+
+        <link
+            href="/styles.css"
+            rel="preload"
+            hreflang="en"
+            referrerpolicy="no-referrer"
+            type="text/css"
+            as="style"
+            onload="this.onload=null;console.log(1);this.rel='stylesheet'"
+        />
     </head>
 
     <body>
