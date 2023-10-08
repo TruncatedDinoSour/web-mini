@@ -4,8 +4,9 @@
 
 from __future__ import annotations
 
-import re
 import typing
+
+import regex as re
 
 
 def rgb_to_hex(match: re.Match[str]) -> str:

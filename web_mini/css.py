@@ -4,7 +4,7 @@
 
 from __future__ import annotations
 
-import re
+import regex as re
 
 from . import clrs, const, recache
 

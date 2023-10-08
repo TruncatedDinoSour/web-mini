@@ -4,9 +4,10 @@
 
 from __future__ import annotations
 
-import re
 import typing
 from functools import wraps
+
+import regex as re
 
 
 class ReCache:
