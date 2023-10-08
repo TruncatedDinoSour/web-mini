@@ -25,10 +25,10 @@ def html_remove_comments(pat: re.Pattern[str], html: str) -> str:
 def html_remove_type(html: str) -> str:
     """remove html `type` attr from <script> and <style>"""
     return (
-        html.replace('<style type="text/css">', "<style>")
-        .replace("<style type=text/css>", "<style>")
-        .replace('<script type="text/javascript">', "<script>")
-        .replace("<script type=text/javascript>", "<script>")
+        html.replace('<style type="text/css"', "<style")
+        .replace("<style type=text/css", "<style")
+        .replace('<script type="text/javascript"', "<script")
+        .replace("<script type=text/javascript", "<script")
     )
 
 
@@ -61,7 +61,7 @@ def html_remove_whitespace(pat: re.Pattern[str], html: str) -> str:
         if idx % 2 == 0 and tags == 0:
             split[idx] = HTML_TAG_BREAK_RE.sub(" ", tag)
         elif (idx + 1) % 2 == 0:
-            tags += 1 if "/" not in tag else -1
+            tags += -1 if "/" in tag else 1
 
     return "".join(split)
 

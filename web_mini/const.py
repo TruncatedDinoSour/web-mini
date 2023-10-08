@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 """constants"""
 
-from typing import Dict, Final, Set
+from typing import Dict, Set
 
-REPLACABLE_CLRS: Final[Dict[str, str]] = {
+REPLACABLE_CLRS: Dict[str, str] = {
     "blanchedalmond": "#ffebcd",
     "burlywood": "#deb887",
     "chartreuse": "#7fff00",
@@ -77,7 +77,7 @@ REPLACABLE_CLRS: Final[Dict[str, str]] = {
     "turquoise": "#40e0d0",
 }
 
-UNNEEDED_HTML_TAGS: Final[Set[str]] = {
+UNNEEDED_HTML_TAGS: Set[str] = {
     "<html>",
     "</colgroup>",
     "</img>",
