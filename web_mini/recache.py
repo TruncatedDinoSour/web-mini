@@ -19,6 +19,8 @@ class ReCache:
     def add_build_hook(
         self, hook: typing.Callable[..., None]
     ) -> typing.Callable[..., None]:
+        """add a build hook to compileall()"""
+
         self.build_hooks.add(hook)
         return hook
 
@@ -58,7 +60,7 @@ class ReCache:
             hook()
 
         for fn in self.cache:
-            if type(fn._pat) is re.Pattern:  # type: ignore
+            if isinstance(fn._pat, re.Pattern):  # type: ignore
                 continue
 
             fn._pat = re.compile(fn._pat, fn._flags)  # type: ignore

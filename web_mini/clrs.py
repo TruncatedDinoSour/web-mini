@@ -78,8 +78,8 @@ def hsl_to_rgb(h: float, s: float, l: float) -> typing.Tuple[int, int, int]:
 
         p: float = 2 * l - q
 
-        r: float = hue_to_rgb(p, q, h + 1 / 3)
-        g: float = hue_to_rgb(p, q, h)
-        b: float = hue_to_rgb(p, q, h - 1 / 3)
+        r = hue_to_rgb(p, q, h + 1 / 3)
+        g = hue_to_rgb(p, q, h)
+        b = hue_to_rgb(p, q, h - 1 / 3)
 
     return int(r * 255), int(g * 255), int(b * 255)

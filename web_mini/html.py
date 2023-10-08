@@ -105,23 +105,24 @@ def html_remove_whitespace(pat: re.Pattern[str], html: str) -> str:
     tags: List[str] = []
     split: List[str] = pat.split(html)
 
-    for idx in range(len(split)):
+    for idx, stag in enumerate(split):
         # if we in a tag
 
         if (idx + 1) % 2 == 0:
-            tag: str = rawtag(s := split[idx])
+            tag: str = rawtag(stag)
 
             if tag.startswith("/"):
                 if not tags or "/" + tags.pop() != tag:
                     raise SyntaxError(
-                        f"tag {idx} ( {s}, got {tag} ) is not closed properly"
+                        f"tag {idx} ( {stag}, got {tag} ) is not closed properly"
                     )
             else:
                 tags.append(tag)
 
             continue
-        elif not tags:
-            temp = re.sub(r">\s+<", "> <", split[idx])
+
+        if not tags:
+            temp = re.sub(r">\s+<", "> <", stag)
             split[idx] = re.sub(r"\s{2,}|[\r\n]", " ", temp)
 
     return "".join(split)

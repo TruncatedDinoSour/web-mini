@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""web-mini -- efficient css and html minifer inspired by https://pypi.org/project/css-html-js-minify/"""
+"""web-mini -- efficient css and html minifer inspired by \
+https://pypi.org/project/css-html-js-minify/"""
 
 from typing import Tuple
 
