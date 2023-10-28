@@ -43,7 +43,7 @@ def css_remove_url_quotes(pat: re.Pattern[str], css: str) -> str:
 @css_fns.recache(r"\s*({|}|:|;|,)\s*")
 def css_remove_whitespace(pat: re.Pattern[str], css: str) -> str:
     """remove useless whitespace"""
-    return pat.sub(r"\1", css).replace("and (", "and(").replace(") and", ")and").strip()
+    return pat.sub(r"\1", css).strip()
 
 
 @css_fns.recache(r"(border|opacity):none")
