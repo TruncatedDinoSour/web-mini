@@ -7,7 +7,7 @@ from typing import Tuple
 
 from . import css, html
 
-__version__: str = "1.3.0"
+__version__: str = "1.3.1"
 __all__: Tuple[str, ...] = "__version__", "css", "html", "compileall"
 
 
