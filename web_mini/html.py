@@ -45,7 +45,7 @@ def html_unquote_attrs(pat: re.Pattern[str], html: str) -> str:
 
 
 @html_fns.recache(
-    r"(<\s*(?:pre|code|textarea).*>|<\s*/\s*(?:pre|code|textarea)\s*>)",
+    r"(<\s*?(?:pre|code|textarea).*?>|<\s*?/\s*?(?:pre|code|textarea)\s*?>)",
     re.I,
 )
 def html_remove_whitespace(pat: re.Pattern[str], html: str) -> str:
@@ -63,7 +63,7 @@ def html_remove_whitespace(pat: re.Pattern[str], html: str) -> str:
         elif (idx + 1) % 2 == 0:
             tags += -1 if "/" in tag else 1
 
-    return "".join(split)
+    return "".join(split).strip()
 
 
 def minify_html(html: str) -> str:

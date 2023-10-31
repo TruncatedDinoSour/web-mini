@@ -67,7 +67,7 @@ def css_sub_zero_units(pat: re.Pattern[str], css: str) -> str:
     return pat.sub(r"\1", css)
 
 
-@css_fns.recache(r"rgb\((\d+),\s*(\d+),\s*(\d+)\)")
+@css_fns.recache(r"rgb\((\d+),\s*?(\d+),\s*?(\d+)\)")
 def css_rgb2hex(pat: re.Pattern[str], css: str) -> str:
     """convert css rgb to hex"""
     return pat.sub(
@@ -76,7 +76,7 @@ def css_rgb2hex(pat: re.Pattern[str], css: str) -> str:
     )
 
 
-@css_fns.recache(r"hsl\((\d+),\s*([\d.]+)%?,\s*([\d.]+)%?\)")
+@css_fns.recache(r"hsl\((\d+),\s*?([\d.]+)%?,\s*?([\d.]+)%?\)")
 def css_hsl2hex(pat: re.Pattern[str], css: str) -> str:
     """convert css hsl to hex"""
     return pat.sub(
@@ -97,7 +97,7 @@ def css_shorten_hex(pat: re.Pattern[str], css: str) -> str:
     return pat.sub(cssfn_shorten_clr, css)
 
 
-@css_fns.recache(r"rgba\((\d+),\s*(\d+),\s*(\d+),\s*([\d.]+)\)")
+@css_fns.recache(r"rgba\((\d+),\s*?(\d+),\s*?(\d+),\s*?([\d.]+)\)")
 def css_rgba2hex(pat: re.Pattern[str], css: str) -> str:
     """convert css rgba to hex"""
     return pat.sub(
@@ -106,7 +106,7 @@ def css_rgba2hex(pat: re.Pattern[str], css: str) -> str:
     )
 
 
-@css_fns.recache(r"hsla\((\d+),\s*([\d.]+)%?,\s*([\d.]+)%?,\s*([\d.]+)\)")
+@css_fns.recache(r"hsla\((\d+),\s*?([\d.]+)%?,\s*?([\d.]+)%?,\s*?([\d.]+)\)")
 def css_hsla2hex(pat: re.Pattern[str], css: str) -> str:
     """convert css hsla to hex"""
     return pat.sub(
@@ -135,7 +135,7 @@ def css_font_weights(css: str) -> str:
 @css_fns.recache(r";;+")
 def css_remove_semicolons(pat: re.Pattern[str], css: str) -> str:
     """remove useless semicolons"""
-    return pat.sub("", css.replace(";}", "}"))
+    return pat.sub("", css).replace(";}", "}")
 
 
 def minify_css(css: str) -> str:

@@ -1,3 +1,5 @@
+@charset "utf-8";
+
 /* this is a comment */
 
 :root {
@@ -42,6 +44,10 @@ body {
 
 li {
     margin: 0.5em;
+}
+
+ul, ul * {
+    color: yellow;
 }
 
 code {
@@ -91,8 +97,13 @@ a[data-link="hello"]::before {
     content: "hello -- ";;
 }
 
+li::before {
+    content: '*';
+}
+
 body {
     background-image: url("/bg.png");
+    color: whitesmoke;
 }
 
 button {
