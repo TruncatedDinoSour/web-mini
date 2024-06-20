@@ -1,3 +1,4 @@
+# This repository has been migrated to the self-hosted ari-web Forgejo instance: <https://git.ari.lt/ari/web-mini>
 # web-mini
 
 > web-mini -- efficient css and html minifer inspired by https://pypi.org/project/css-html-js-minify/
